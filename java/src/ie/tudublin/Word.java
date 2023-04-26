@@ -37,10 +37,16 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Word [follows=" + follows + ", word=" + word + "]";
+        return word + ": " + follows;
     }
 
-    public void findFollow(String search) {
-        
+    public void findFollow(String word) {
+        for (Follow f : follows) {
+            if (f.getWord().equals(word)) {
+                f.setCount(f.getCount() + 1);
+                return;
+            }
+        }
+        follows.add(new Follow(word, 1));
     }
 }

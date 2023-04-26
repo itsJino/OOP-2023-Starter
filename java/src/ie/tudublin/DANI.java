@@ -3,8 +3,8 @@ package ie.tudublin;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import ie.tudublin.Follow;
-import ie.tudublin.Word;
+import ie.tudublin.Follow.*;
+import ie.tudublin.Word.*;
 
 public class DANI extends PApplet {
 	public void settings() {
@@ -18,7 +18,7 @@ public class DANI extends PApplet {
 	String[] w2;
 	String[] line;
 
-	Follow follow = new Follow();
+	ArrayList<Word> words = new ArrayList<Word>();
 
     public String[] writeSonnet()
     {
@@ -46,6 +46,8 @@ public class DANI extends PApplet {
         textAlign(CENTER, CENTER);
 
 		loadFile();
+
+		printModel();
 	}
 
 	public void loadFile() {
@@ -64,27 +66,25 @@ public class DANI extends PApplet {
 		// remove punctuation characters
 		for (int i = 0; i < w.length; i++) {
 			w[i] = w[i].replaceAll("[^\\w\\s]", "");
-		}
-
-		// convert string to lower case
-		for (int i = 0; i < w.length; i++) {
 			w[i] = w[i].toLowerCase();
 		}
 
+		// Put all unique words into String array w2
 		for (int i = 0; i < w.length; i++) {
 			if(!findWord(w[i])) {
 				w2 = append(w2, w[i]);
 			}
 		}
 
-		// print w2
-		System.out.println("Words");
+		// add words to arraylist words
 		for (int i = 0; i < w2.length; i++) {
-			System.out.println(w2[i]);
-		}
-
+			Word word = new Word(w2[i]);
+			
+			words.add(word);
+		}		
 	}
 
+	// Check if word is already in array, if so don't add it, if not add it
 	public Boolean findWord(String search) {
 		for (int i = 0; i < w2.length; i++) {
 			if (w2[i].equals(search)) {
@@ -94,17 +94,11 @@ public class DANI extends PApplet {
 		return false;
 	}
 
-	public void findFollow(String search) {
-
-		for (int i = 0; i < w.length; i++) {
-			if (w[i].equals(search)) {
-				follow.setWord(w[i + 1]);
-				follow.setCount(follow.getCount() + 1);
-			}
-		}
-	}
-
 	public void printModel() {
-		
+		for (int i = 0; i < words.size(); i++) {
+			Word word = words.get(i);
+			System.out.println(word);
+		}
+
 	}
 }

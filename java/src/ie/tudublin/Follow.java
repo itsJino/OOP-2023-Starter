@@ -10,7 +10,7 @@ public class Follow {
     }
 
     public Follow() {
-        
+
     }
 
     public String getWord() {
@@ -28,9 +28,6 @@ public class Follow {
     
     @Override
     public String toString() {
-        return "Follow [word=" + word + ", count=" + count + "]";
+        return word + "(" + count + ")";
     }
-
-    
-
 }
