@@ -39,4 +39,8 @@ public class Word {
     public String toString() {
         return "Word [follows=" + follows + ", word=" + word + "]";
     }
+
+    public void findFollow(String search) {
+        
+    }
 }
